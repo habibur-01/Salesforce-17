@@ -301,15 +301,20 @@ const CaseCard = () => {
       <Box className=" flex items-center justify-center">
         <Box
           className="  rounded-[35px] overflow-hidden w-full " // there will be changed******
-          sx={{ bgcolor: theme.palette.primary.cardLightBg }}
+          sx={{
+            bgcolor: {
+              xs: "transparent",
+              sm: theme.palette.primary.cardLightBg,
+            },
+          }}
         >
           <Box
             className={`lg:flex w-full 
-              ${isSidebarOpen ? "lg:flex-col xl:flex-row" : "lg:flex-row "}`}
+              ${isSidebarOpen ? "lg:flex-row" : "lg:flex-col xl:flex-row "}`}
           >
             <Box
               className={`flex-2  ${
-                isSidebarOpen ? "lg:flex-2 xl:w-[40%]" : "lg:w-[40%] "
+                isSidebarOpen ? "lg:w-[40%] " : "lg:flex-2 xl:w-[40%]"
               }`}
               sx={{ bgcolor: mode === "dark" ? "#3C3F54" : "#E8F1FF" }}
             >
@@ -321,7 +326,11 @@ const CaseCard = () => {
                 }}
               >
                 <Typography
-                  sx={{ fontSize: "23px", fontWeight: "600", mt: "5px" }}
+                  sx={{
+                    fontSize: { xs: "18px", sm: "23px" },
+                    fontWeight: "600",
+                    mt: "5px",
+                  }}
                 >
                   New Case Management
                 </Typography>
@@ -330,18 +339,18 @@ const CaseCard = () => {
 
             {/* middle section  */}
             <Box
-              className={`flex-[1.5] w-auto  lg:rounded-bl-[30px] lg:rounded-br-[30px] ml-3 md:ml-5 lg:ml-0  px-4`}
+              className={`flex-[1.5] w-auto lg:rounded-bl-[30px] lg:rounded-br-[30px] ml-3 md:ml-5 lg:ml-0 pt-2 md:pt-0  md:px-4`}
               sx={{
                 bgcolor:
                   mode === "dark"
                     ? {
                         sm: "transparent",
-                        md: `${isSidebarOpen ? "transparent" : "#3C3F54"}`,
+                        md: `${isSidebarOpen ? "#3C3F54" : "transparent"}`,
                         lg: "#3C3F54",
                       }
                     : {
                         sm: "transparent",
-                        md: `${isSidebarOpen ? "transparent" : "#E8F1FF"}`,
+                        md: `${isSidebarOpen ? "#E8F1FF" : "transparent"}`,
                         lg: "#E8F1FF",
                       },
               }}
@@ -349,8 +358,8 @@ const CaseCard = () => {
               <Box
                 className={`flex items-center ${
                   isSidebarOpen
-                    ? "lg:justify-start xl:justify-center lg:px-4 xl:px-0"
-                    : "lg:justify-center"
+                    ? "lg:justify-center"
+                    : "lg:justify-start xl:justify-center lg:px-4 xl:px-0"
                 }`}
               >
                 {/* middle tab section here  */}
@@ -513,16 +522,21 @@ const CaseCard = () => {
               <Box
                 className={`h-full ${
                   isSidebarOpen
-                    ? "lg:rounded-tl-none xl:rounded-tl-[20px]"
-                    : "lg:rounded-tl-[20px]"
+                    ? "lg:rounded-tl-[20px]"
+                    : "lg:rounded-tl-none xl:rounded-tl-[20px]"
                 } `}
-                sx={{ bgcolor: theme.palette.primary.cardLightBg }}
+                sx={{
+                  bgcolor: {
+                    xs: mode === "dark" ? "#383C51" : "#E4EFFF",
+                    sm: theme.palette.primary.cardLightBg,
+                  },
+                }}
               >
                 <Box
                   className={`flex items-center  pl-4 md:pl-6 lg:pl-0 lg:px-6 py-3 ${
                     isSidebarOpen
-                      ? "lg:justify-start xl:justify-end lg:pl-7 xl:pl-0"
-                      : "lg:justify-end"
+                      ? "lg:justify-end"
+                      : "lg:justify-start xl:justify-end lg:pl-7 xl:pl-0"
                   }`}
                   sx={{ color: theme.palette.primary.semiWhite }}
                 >
@@ -567,7 +581,7 @@ const CaseCard = () => {
           {/* card content section  */}
           <Box>
             <Xwrapper>
-              <Box className="px-[30px] mb-5 w-[100%]">
+              <Box className="px-0 md:px-[30px] mb-5 w-[100%]">
                 {/* card content section */}
                 <Box className="grid grid-cols-1 xl:grid-cols-4 gap-x-14 gap-y-4 mt-4">
                   {/* box 1 */}
@@ -635,7 +649,7 @@ const CaseCard = () => {
                       Technical Resolution
                     </Typography>
                     <Box
-                      className="rounded-3xl px-3 md:px-6 py-4 flex-1 flex-col gap-y-[37px]"
+                      className="rounded-3xl px-3 md:px-6 py-4 flex-1 flex-col gap-y-[37px] flex-1"
                       sx={{
                         bgcolor: mode === "dark" ? "#25293C" : "white",
                         color: "text.black",
@@ -657,7 +671,7 @@ const CaseCard = () => {
                     >
                       New Task
                     </Typography>
-                    <Box className="rounded-3xl w-full h-full">
+                    <Box className="rounded-3xl w-full h-full flex-1">
                       {/* Ensure DndNewTaskCard has access to DnD context */}
                       <DndProvider backend={HTML5Backend}>
                         <DndNewTaskCard />

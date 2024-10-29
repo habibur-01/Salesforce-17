@@ -4,6 +4,7 @@ import {
   Grid,
   IconButton,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
@@ -20,6 +21,9 @@ const UnpaidInvoices = ({ data }) => {
   const mode = useSelector((state) => state.themeSlice.themeMode);
   const isSidebarOpen = useSelector(
     (state) => state.sidebarReducer.isSidebarOpen
+  );
+  const extraSmallDevice = useMediaQuery(
+    "(min-width:320px) and (max-width:415px)"
   );
 
   // Handle toggling and selecting invoice
@@ -56,10 +60,20 @@ const UnpaidInvoices = ({ data }) => {
                     <Avatar
                       alt="Remy Sharp"
                       src={info.imgUrl}
-                      sx={{ width: 50, height: 50 }}
+                      sx={{
+                        width: 50,
+                        height: 50,
+                      }}
                     />
                     {/* invoice id & time */}
-                    <Box>
+                    <Box
+                      sx={{
+                        display: {
+                          md: isSidebarOpen ? "block" : "none",
+                          lg: isSidebarOpen ? "" : "block",
+                        },
+                      }}
+                    >
                       <Typography
                         sx={{
                           fontWeight: "600",
@@ -145,9 +159,9 @@ const UnpaidInvoices = ({ data }) => {
                 <Box
                   className={`grid grid-cols-1  ${
                     isSidebarOpen
-                      ? " md:grid-cols-1 xl:grid-cols-3"
-                      : "md:grid-cols-2"
-                  } xl:grid-cols-3 w-full gap-4`}
+                      ? "md:grid-cols-2 xl:grid-cols-3"
+                      : " md:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3"
+                  }  w-full gap-4`}
                 >
                   {/* left  */}
                   <Box className=" flex flex-col gap-y-3">
@@ -261,8 +275,8 @@ const UnpaidInvoices = ({ data }) => {
                 <Box
                   className={`grid grid-cols-1  2xl:grid-cols-4 w-full gap-3 ${
                     isSidebarOpen
-                      ? " md:grid-cols-1 xl:grid-cols-3"
-                      : "md:grid-cols-2"
+                      ? "md:grid-cols-2 xl:grid-cols-2"
+                      : " md:grid-cols-1 xl:grid-cols-2 2xl:grid-cols-4"
                   }`}
                 >
                   <Box
@@ -432,7 +446,13 @@ const UnpaidInvoices = ({ data }) => {
                   className=" p-4  rounded-[30px] w-full flex items-center justify-center"
                   sx={{ bgcolor: theme.palette.primary.cardBg3 }}
                 >
-                  <Box className="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4  gap-x-2">
+                  <Box
+                    className={`w-full grid grid-cols-3  xl:grid-cols-3 2xl:grid-cols-4  gap-x-2 ${
+                      isSidebarOpen
+                        ? "md:grid-cols-3"
+                        : "md:grid-cols-2 lg:grid-cols-3"
+                    }`}
+                  >
                     {/* sub total  */}
                     <Box>
                       <Typography
@@ -526,7 +546,13 @@ const UnpaidInvoices = ({ data }) => {
                     </Box>
 
                     {/* payout now button and icon section  */}
-                    <Box className="col-span-2 2xl:col-span-1 mt-2 2xl:mt-0  flex items-center 2xl:justify-end gap-x-2">
+                    <Box
+                      className={`col-span-3 2xl:col-span-1 mt-2 2xl:mt-0  flex items-center 2xl:justify-end gap-x-2 ${
+                        isSidebarOpen
+                          ? "md:col-span-2 "
+                          : "md:col-span-3 lg:col-span-3 2xl:col-span-1"
+                      }`}
+                    >
                       <IconButton
                         sx={{
                           border: `1px solid ${theme.palette.primary.semiWhite}`,
@@ -554,6 +580,7 @@ const UnpaidInvoices = ({ data }) => {
                       >
                         <Typography
                           sx={{
+                            fontSize: { xs: "14px", sm: "16px" },
                             fontWeight: "600",
                             color: mode === "dark" ? "#7f8896" : "white",
                           }}

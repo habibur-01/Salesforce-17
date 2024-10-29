@@ -35,7 +35,15 @@ const CaseSection = () => {
         {/* customer journey section  */}
         <Box className=" flex flex-col gap-y-3">
           {/* text  */}
-          <Typography sx={{ fontSize: "30px", fontWeight: "600" }}>Customer Journeys</Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "24px", sm: "30px" },
+              paddingLeft: { xs: "12px", md: "0px" },
+              fontWeight: "600",
+            }}
+          >
+            Customer Journeys
+          </Typography>
 
           {/* case card section  */}
           <Box>
@@ -46,58 +54,19 @@ const CaseSection = () => {
         {/* bottom section  */}
         <Box className=" grid grid-cols-1 xl:grid-cols-2 gap-3">
           {/* left section  */}
-          <Box className=" px-6 py-4 rounded-3xl" sx={{ bgcolor: theme.palette.primary.cardLightBg }}>
+          <Box
+            className=" px-6 py-4 rounded-3xl"
+            sx={{ bgcolor: theme.palette.primary.cardLightBg }}
+          >
             <Box>
               {/* top section  */}
               <Box>
                 {/* text  */}
                 <Box className=" md:flex items-center justify-between">
-                  <Typography sx={{ fontSize: "25px", fontWeight: "600" }}>Suggested Knowledge</Typography>
+                  <Typography sx={{ fontSize: "25px", fontWeight: "600" }}>
+                    Suggested Knowledge
+                  </Typography>
 
-                  {/* right side icon section  */}
-                  <Box className=" flex items-center gap-x-2 mt-2 md:mt-0">
-                    {/* icon 1  */}
-                    <IconButton
-                       size="large"
-                      sx={{
-                        border: `1px solid ${theme.palette.primary.darkSemiWhite}`,
-                        borderRadius: "100%",
-                      }}
-                    >
-                      <AddIcon sx={{ color: theme.palette.icon.iconColor }} />
-                    </IconButton>
-                    {/* icon 2  */}
-                    <IconButton
-                    size="large"
-                      sx={{
-                        border: `1px solid ${theme.palette.primary.darkSemiWhite}`,
-                        borderRadius: "100%",
-                      }}
-                    >
-                      <DriveFolderUploadIcon sx={{ color: theme.palette.icon.iconColor }} />
-                    </IconButton>
-                    {/* icon 3  */}
-                  
-                      {/* <CalendarTodayIcon sx={{ color: theme.palette.icon.iconColor }} /> */}
-                      <DateTesting/>
-
-                  </Box>
-                </Box>
-              </Box>
-              {/* table section  */}
-              <Box className=" mt-10">
-                <SuggestedKnowledgeTable />
-              </Box>
-            </Box>
-          </Box>
-          {/* right section  */}
-          <Box sx={{ bgcolor: theme.palette.primary.cardLightBg }} className=" px-6 py-4 rounded-3xl">
-            <Box>
-              {/* top section  */}
-              <Box>
-                {/* text  */}
-                <Box className="md:flex items-center justify-between ">
-                  <Typography sx={{ fontSize: "25px" }}>Support Ticket Journey</Typography>
                   {/* right side icon section  */}
                   <Box className=" flex items-center gap-x-2 mt-2 md:mt-0">
                     {/* icon 1  */}
@@ -112,16 +81,68 @@ const CaseSection = () => {
                     </IconButton>
                     {/* icon 2  */}
                     <IconButton
-                    size="large"
+                      size="large"
                       sx={{
                         border: `1px solid ${theme.palette.primary.darkSemiWhite}`,
                         borderRadius: "100%",
                       }}
                     >
-                      <DriveFolderUploadIcon sx={{ color: theme.palette.icon.iconColor }} />
+                      <DriveFolderUploadIcon
+                        sx={{ color: theme.palette.icon.iconColor }}
+                      />
+                    </IconButton>
+                    {/* icon 3  */}
+
+                    {/* <CalendarTodayIcon sx={{ color: theme.palette.icon.iconColor }} /> */}
+                    <DateTesting />
+                  </Box>
+                </Box>
+              </Box>
+              {/* table section  */}
+              <Box className=" mt-10">
+                <SuggestedKnowledgeTable />
+              </Box>
+            </Box>
+          </Box>
+          {/* right section  */}
+          <Box
+            sx={{ bgcolor: theme.palette.primary.cardLightBg }}
+            className=" px-6 py-4 rounded-3xl"
+          >
+            <Box>
+              {/* top section  */}
+              <Box>
+                {/* text  */}
+                <Box className="md:flex items-center justify-between ">
+                  <Typography sx={{ fontSize: "25px" }}>
+                    Support Ticket Journey
+                  </Typography>
+                  {/* right side icon section  */}
+                  <Box className=" flex items-center gap-x-2 mt-2 md:mt-0">
+                    {/* icon 1  */}
+                    <IconButton
+                      size="large"
+                      sx={{
+                        border: `1px solid ${theme.palette.primary.darkSemiWhite}`,
+                        borderRadius: "100%",
+                      }}
+                    >
+                      <AddIcon sx={{ color: theme.palette.icon.iconColor }} />
+                    </IconButton>
+                    {/* icon 2  */}
+                    <IconButton
+                      size="large"
+                      sx={{
+                        border: `1px solid ${theme.palette.primary.darkSemiWhite}`,
+                        borderRadius: "100%",
+                      }}
+                    >
+                      <DriveFolderUploadIcon
+                        sx={{ color: theme.palette.icon.iconColor }}
+                      />
                     </IconButton>
                     {/* icon 3 the calender section  */}
-                    <DateTesting/>
+                    <DateTesting />
                     {/* <IconButton
                       sx={{
                         border: `1px solid ${theme.palette.primary.darkSemiWhite}`,
@@ -134,10 +155,13 @@ const CaseSection = () => {
                 </Box>
               </Box>
               {/* chart section  */}
-              <Box className=" mt-10 grid grid-cols-2 md:gap-2">
+              <Box className=" mt-10 grid grid-cols-1 md:grid-cols-2 md:gap-2">
                 {/* left  */}
                 <Box className=" relative">
-                  <SupportTicketJourney data={[80, 20]} colors={["#83A2DB", "#83A2DB"]} />
+                  <SupportTicketJourney
+                    data={[80, 20]}
+                    colors={["#83A2DB", "#83A2DB"]}
+                  />
                   <Box
                     className="absolute -top-2 md:top-0 left-24 md:left-12 lg:left-24 xl:left-14 2xl:left-24 h-11 w-11 rounded-full border-[1px] border-solid border-[rgba(255,255,255,0.2)] flex items-center justify-center "
                     sx={{
@@ -152,7 +176,10 @@ const CaseSection = () => {
 
                 {/* right  */}
                 <Box className="relative ">
-                  <SupportTicketJourney data={[80, 20]} colors={["#CE6969", "#CE6969"]} />
+                  <SupportTicketJourney
+                    data={[80, 20]}
+                    colors={["#CE6969", "#CE6969"]}
+                  />
                   <Box
                     className="absolute -top-2 md:top-0 left-24 md:left-12 lg:left-24 xl:left-14 2xl:left-24 h-11 w-11 rounded-full border-[1px] border-solid border-[rgba(255,255,255,0.2)] flex items-center justify-center "
                     sx={{

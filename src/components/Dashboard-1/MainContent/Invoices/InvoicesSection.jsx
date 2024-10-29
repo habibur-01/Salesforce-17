@@ -80,18 +80,13 @@ const InvoicesSection = () => {
   const isSidebarOpen = useSelector(
     (state) => state.sidebarReducer.isSidebarOpen
   );
+  // console.log("sidebar" + isSidebarOpen);
   // const isLargeScreen = useMediaQuery("(min-width:1200px)");
   return (
     <Layout1>
       <Box className=" flex flex-col gap-y-[18px]">
         {/* top section  */}
-        <Box
-          className={` flex items-center justify-between ${
-            isSidebarOpen
-              ? "md:justify-start lg:justify-between"
-              : "justify-between"
-          } `}
-        >
+        <Box className={` flex items-center justify-between`}>
           {/* left  */}
           <Box className=" flex items-center gap-x-2">
             {/* text  */}
@@ -131,7 +126,13 @@ const InvoicesSection = () => {
               }}
               className="   p-8 rounded-[35px]"
             >
-              <Box className=" grid grid-cols-1 lg:grid-cols-3 gap-x-6 gap-y-8">
+              <Box
+                className={`grid grid-cols-1 lg:grid-cols-3 ${
+                  isSidebarOpen
+                    ? "xl:grid-cols-3"
+                    : "xl:grid-cols-2 2xl:grid-cols-3"
+                } gap-x-6 gap-y-8`}
+              >
                 {/* left box in card  */}
                 <Box className=" flex flex-col gap-y-8 ">
                   {/* overdue  */}
@@ -153,9 +154,7 @@ const InvoicesSection = () => {
                   {/*month and  progress section  */}
                   <Box>
                     <Box
-                      className={`flex items-center justify-between gap-x-2 ${
-                        isSidebarOpen ? "md:flex-col lg:flex-row" : "flex-row"
-                      }`}
+                      className={`flex items-center justify-between gap-x-2 `}
                     >
                       <Box className=" w-full">
                         <Box className=" flex flex-col  gap-y-2  w-full ">
@@ -375,7 +374,9 @@ const InvoicesSection = () => {
                 clipPath:
                   "polygon(49% 1%, 100% 0, 100% 100%, 47% 99%, 0 100%, 0 0)",
               }}
-              className=" h-auto pb-4 md:pb-0 md:h-[300px]  rounded-[35px] px-8 pt-8"
+              className={`h-auto pb-4 md:pb-0 lg:pb-0 ${
+                isSidebarOpen ? "md:h-[300px]" : "md:max-h-max"
+              }   rounded-[35px] px-8 pt-8`}
             >
               <Box className=" flex flex-col gap-y-8">
                 {/* top amount option  */}
@@ -388,7 +389,13 @@ const InvoicesSection = () => {
                     </Typography>
 
                     {/* amount and button  */}
-                    <Box className="md:flex xl:flex-col xxl:flex-row items-center gap-x-2">
+                    <Box
+                      className={`md:flex xl:flex-col xxl:flex-row items-center gap-x-2 ${
+                        isSidebarOpen
+                          ? "md:flex-row"
+                          : "md:flex-col md:justify-start lg:flex-row xxl:flex-col 2xl:flex-row xxl:justify-start"
+                      }`}
+                    >
                       <Box className="flex items-center gap-x-2">
                         <Typography
                           sx={{ color: "gray", mt: "11px", fontSize: "26px" }}
@@ -425,8 +432,14 @@ const InvoicesSection = () => {
                 </Box>
 
                 {/* bottom payment option  */}
-                <Box className=" px-4  xl:px-0 xxl:px-0 2xl:px-4">
-                  <Box className=" md:flex items-center md:justify-between ">
+                <Box className=" px-4  xl:px-0 xxl:px-0 2xl:px-4 ">
+                  <Box
+                    className={`md:flex items-center md:justify-between ${
+                      isSidebarOpen
+                        ? "md:flex-row"
+                        : "md:flex-col lg:flex-row xl:flex-col 2xl:flex-row md:gap-y-2 pb-2 2xl:pb-0"
+                    }`}
+                  >
                     {/* left  */}
                     <Box className=" flex justify-center items-end gap-x-2 ">
                       {/* left box  */}
@@ -510,7 +523,7 @@ const InvoicesSection = () => {
                           color: theme.palette.primary.semiWhite,
                         }}
                       >
-                        <Typography className="text-center">
+                        <Typography className="text-center ">
                           Pay out now
                         </Typography>
                       </Box>

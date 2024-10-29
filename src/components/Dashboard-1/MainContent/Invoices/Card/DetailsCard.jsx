@@ -134,16 +134,16 @@ const DetailsCard = () => {
     )
   );
 
-  console.log("filteredData", filteredData);
-  console.log("Data", data);
-  console.log("searchTerm", searchTerm);
+  // console.log("filteredData", filteredData);
+  // console.log("Data", data);
+  // console.log("searchTerm", searchTerm);
 
   return (
     <Box className=" flex flex-col gap-y-4 ">
       {/* Card Topbar section  */}
       <Box
         className={`grid grid-cols-2  ${
-          isSidebarOpen ? "md:grid-cols-1 xl:grid-cols-3" : "md:grid-cols-3"
+          isSidebarOpen ? "md:grid-cols-3" : "md:grid-cols-2 lg:grid-cols-3"
         } gap-2 xl:grid-cols-6`}
       >
         {/* text  */}
@@ -377,7 +377,11 @@ const DetailsCard = () => {
             </Box>
             <Box
               sx={{ bgcolor: mode === "dark" ? "#5A5D6E" : "white" }}
-              className="flex-[1.5] w-auto  lg:rounded-bl-[30px] lg:rounded-br-[30px] ml-3 md:ml-5 lg:ml-0  px-4"
+              className={`flex-[1.5] py-2 xl:pt-0  xl:px-3 bg-white lg:rounded-bl-[30px]  ${
+                isSidebarOpen
+                  ? "lg:w-[40%] md:rounded-br-[30px]"
+                  : "lg:w-auto lg:px-3 md:rounded-br-none lg:rounded-br-[30px]"
+              }`}
             >
               <Box className=" flex items-center justify-center">
                 {/* middle tab section here  */}
@@ -439,7 +443,7 @@ const DetailsCard = () => {
             <Box
               sx={{ bgcolor: mode === "dark" ? "#5A5D6E" : "white" }}
               className={`hidden ${
-                isSidebarOpen ? "md:hidden lg:block" : "md:block"
+                isSidebarOpen ? "md:block" : "md:hidden lg:block"
               } flex-2 lg:w-[30%] 2xl:w-[40%]`}
             >
               <Box
@@ -517,7 +521,7 @@ const DetailsCard = () => {
               </Box>
             </Box>
           </Box>
-          <Box className="px-[30px] mb-5">
+          <Box className={` px-3 md:px-[30px] mb-5`}>
             {activeTab === "all invoices" && <AllInvoices />}
             {activeTab === "draft" && <DraftInvoices />}
             {activeTab === "Unpaid Invoices" && (

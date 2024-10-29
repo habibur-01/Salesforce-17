@@ -23,16 +23,18 @@ const DraggableBox = ({ box, index, moveBox, mode }) => {
   });
 
   return (
-    <div
+    <Box
       id={box.child}
       ref={(node) => ref(drop(node))}
-      style={{
+      sx={{
         backgroundColor:
           box.id === "1"
             ? "#25293C"
             : mode === "dark"
-            ? "rgb(83 90 102)"
-            : "#fff",
+            ? { xs: "#454c6b", sm: "rgb(83 90 102)" }
+            : { xs: "#e2e2e2", sm: "#fff" },
+      }}
+      style={{
         color: box.id === "1" ? "#fff" : mode === "dark" ? "#fff" : "#000",
         borderRadius: "24px",
         display: "flex",
@@ -51,7 +53,7 @@ const DraggableBox = ({ box, index, moveBox, mode }) => {
       >
         {box.content}
       </Typography>
-    </div>
+    </Box>
   );
 };
 
@@ -76,7 +78,7 @@ const DndNewTaskCard = () => {
 
   return (
     <Box
-      className="rounded-3xl h-full px-6 py-4 w-full grid grid-cols-1 md:grid-cols-2 gap-3 "
+      className="rounded-3xl h-full px-6 py-4 w-full grid grid-cols-1 md:grid-cols-2  gap-3 "
       sx={{
         border: `1px solid ${theme.palette.primary.main}`,
         color: theme.palette.text.black,

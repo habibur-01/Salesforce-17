@@ -11,7 +11,7 @@ export const sidebarSlice = createSlice({
   reducers: {
     setIsSidebarOpen: (state) => {
       state.isSidebarOpen = !state.isSidebarOpen;
-      localStorage.setItem("themeMode", state.themeMode);
+      localStorage.setItem("isSidebarOpen", state.isSidebarOpen);
     },
   },
 });

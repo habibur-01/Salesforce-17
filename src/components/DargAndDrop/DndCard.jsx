@@ -20,9 +20,7 @@ export const DndCard = ({
   rightSideChildren,
 }) => {
   const theme = useTheme();
-  const isSidebarOpen = useSelector(
-    (state) => state.sidebarReducer.isSidebarOpen
-  );
+
   const mode = useSelector((state) => state.themeSlice.themeMode);
   // console.log("label", label);
   // console.log("staus", IssueIdentification);
@@ -63,7 +61,7 @@ export const DndCard = ({
           {/* <Typography>{label}</Typography> */}
           <Box className="flex flex-col  ">
             <Box
-              className="rounded-3xl flex-1"
+              className="rounded-3xl flex-1 "
               sx={{
                 // bgcolor: "primary.main", old
                 bgcolor: mode === "dark" ? "#25293C" : "white",
@@ -71,10 +69,10 @@ export const DndCard = ({
               }}
             >
               {/* item 1 */}
-              <Box className="  py-4  ">
+              <Box className="py-4 ">
                 <Box
                   id={children}
-                  className=" flex items-center justify-between px-6"
+                  className=" flex items-center justify-between sm:px-4 md:px-6 "
                 >
                   {/* there will be the connected box  */}
                   <Box
@@ -84,7 +82,7 @@ export const DndCard = ({
                     }}
                   ></Box>
                   {/* avatar and text  */}
-                  <Box className=" flex w-[65%] px-3 items-center gap-x-2">
+                  <Box className=" flex w-[50%] md:w-[65%] px-3 items-center gap-x-2">
                     <Avatar
                       alt="Remy Sharp"
                       src={imgUrl}
@@ -98,7 +96,7 @@ export const DndCard = ({
                     </Typography>
                   </Box>
                   {/* icon section  */}
-                  <Box className=" flex items-center gap-x-1">
+                  <Box className=" flex w-[50%] justify-end pr-3 items-center gap-x-1">
                     <IconButton size="large">
                       <DoneAllIcon
                         sx={{

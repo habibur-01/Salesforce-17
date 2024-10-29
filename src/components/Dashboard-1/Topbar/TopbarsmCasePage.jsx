@@ -23,6 +23,10 @@ import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import { Avatar, Typography, useTheme } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import LayersIcon from "@mui/icons-material/Layers";
+import BedtimeIcon from "@mui/icons-material/Bedtime";
+import LightModeIcon from "@mui/icons-material/LightMode";
+import { setThemeMode } from "redux/features/theme/themeSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const TopbarsmCasePage = () => {
   const theme = useTheme();
@@ -33,6 +37,8 @@ const TopbarsmCasePage = () => {
   const toggleDrawer = (newOpen) => () => {
     setOpen(newOpen);
   };
+  const dispatch = useDispatch();
+  const mode = useSelector((state) => state.themeSlice.themeMode);
   const icons = [
     <WorkspacesIcon />,
     <StarsIcon />,
@@ -86,6 +92,7 @@ const TopbarsmCasePage = () => {
         width: 250,
         bgcolor: theme.palette.background.main,
         height: "100vh",
+        overflowY: "auto",
       }}
       role="presentation"
       onClick={toggleDrawer(false)}
@@ -134,6 +141,27 @@ const TopbarsmCasePage = () => {
             </ListItemButton>
           </ListItem>
         ))}
+        {/* Dark mode section  */}
+        <ListItem disablePadding>
+          {/* dark mode icon  */}
+          {mode === "light" ? (
+            <ListItemButton onClick={() => dispatch(setThemeMode("dark"))}>
+              <ListItemIcon>
+                <BedtimeIcon />
+              </ListItemIcon>
+
+              <ListItemText primary={"Night"} />
+            </ListItemButton>
+          ) : (
+            <ListItemButton onClick={() => dispatch(setThemeMode("light"))}>
+              <ListItemIcon>
+                <LightModeIcon />
+              </ListItemIcon>
+
+              <ListItemText primary={"Light"} />
+            </ListItemButton>
+          )}
+        </ListItem>
       </List>
     </Box>
   );

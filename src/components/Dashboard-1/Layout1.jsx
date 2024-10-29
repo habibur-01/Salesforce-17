@@ -14,7 +14,7 @@ const Layout1 = ({ children }) => {
   const changeHeader = location.pathname.includes("cases");
   const mode = useSelector((state) => state.themeSlice.themeMode);
 
-  console.log("check the theme mode: ", mode);
+  // console.log("check the theme mode: ", mode);
 
   console.log(changeHeader);
   // Detect scroll event to toggle background color
@@ -35,7 +35,7 @@ const Layout1 = ({ children }) => {
 
   return (
     <Box
-      className="px-8 "
+      className="px-3 md:px-8 "
       sx={{
         backgroundImage:
           mode === "dark"
@@ -49,7 +49,11 @@ const Layout1 = ({ children }) => {
           className="w-full   pt-4 px-2 rounded-b-3xl"
           sx={{
             position: "sticky",
-            bgcolor: isScrolled ? (mode==="dark" ? "#25293C" : "white") : "transparent", // bg color only shows when scrolled
+            bgcolor: isScrolled
+              ? mode === "dark"
+                ? "#25293C"
+                : "white"
+              : "transparent", // bg color only shows when scrolled
             top: 0, // Sticky position at the top
             zIndex: 50,
             transition: "background-color 0.3s ease", // Smooth transition when scroll changes
