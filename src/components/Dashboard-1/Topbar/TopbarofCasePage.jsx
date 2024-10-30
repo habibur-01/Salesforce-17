@@ -43,7 +43,7 @@ const TopbarofCasePage = () => {
       "Relationship",
       "Opportunities",
       "Leads",
-      "Calendar",
+      "Planning",
       "Cases",
       "Invoices",
       "Reports",

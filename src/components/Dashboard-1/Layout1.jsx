@@ -11,7 +11,7 @@ const Layout1 = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
   const [isScrolled, setIsScrolled] = useState(false);
-  const changeHeader = location.pathname.includes("cases");
+  const changeHeader = location.pathname.includes("invoices");
   const mode = useSelector((state) => state.themeSlice.themeMode);
 
   // console.log("check the theme mode: ", mode);
@@ -59,7 +59,7 @@ const Layout1 = ({ children }) => {
             transition: "background-color 0.3s ease", // Smooth transition when scroll changes
           }}
         >
-          {changeHeader ? <TopbarofCasePage /> : <Topbar />}
+          {changeHeader ? <Topbar /> : <TopbarofCasePage />}
         </Box>
         {/* Main content area */}
         <Box className="flex gap-x-4">

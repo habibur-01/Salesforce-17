@@ -1,7 +1,10 @@
 import { useState } from "react";
 import Chart from "react-apexcharts";
 
-const SupportTicketJourney = ({ data = [80, 20], colors = ["#83a2db", "#83a2db"] }) => {
+const SupportTicketJourney = ({
+  data = [80, 20],
+  colors = ["#83a2db", "#83a2db"],
+}) => {
   const [options, setOptions] = useState({
     chart: {
       type: "donut",

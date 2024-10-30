@@ -4,7 +4,6 @@ import {
   Grid,
   IconButton,
   Typography,
-  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
@@ -21,9 +20,6 @@ const UnpaidInvoices = ({ data }) => {
   const mode = useSelector((state) => state.themeSlice.themeMode);
   const isSidebarOpen = useSelector(
     (state) => state.sidebarReducer.isSidebarOpen
-  );
-  const extraSmallDevice = useMediaQuery(
-    "(min-width:320px) and (max-width:415px)"
   );
 
   // Handle toggling and selecting invoice
