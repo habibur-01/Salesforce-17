@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 
 const EmployeeDetailsCard = ({ employeeInfo }) => {
-  console.log(employeeInfo);
+  // console.log(employeeInfo);
   const {
     employeeName,
     imgUrl,
@@ -15,10 +15,12 @@ const EmployeeDetailsCard = ({ employeeInfo }) => {
     completeProject,
     pendingProject,
   } = employeeInfo;
+
   return (
     <Box>
       <Box>
         <Typography>{employeeName}</Typography>
+       
       </Box>
     </Box>
   );

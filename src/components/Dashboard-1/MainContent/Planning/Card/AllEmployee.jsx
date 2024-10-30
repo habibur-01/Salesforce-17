@@ -6,132 +6,38 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import SearchIcon from "@mui/icons-material/Search";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import StorageIcon from "@mui/icons-material/Storage";
 import DonutChartWithIcon from "../Chart/DonutCahrtWithIcon";
 import EmployeeDetailsCard from "./EmployeeDetailsCard";
+import SouthEastIcon from "@mui/icons-material/SouthEast";
+import EditCalendarIcon from "@mui/icons-material/EditCalendar";
+import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
+import NotificationsIcon from "@mui/icons-material/Notifications";
+import axios from "axios";
 // import RadialBarChart from "../Chart/RadialBarChart";
-const data = [
-  {
-    id: 1,
-    employeeName: "Sam Frank",
-    designition: "UX Designer",
-    imgUrl: "https://i.ibb.co/YcXc5Cg/1.png",
-    todayWorkingHour: 84,
-    ratePerHour: 42,
-    experince: 5,
-    exp_this_platform: 2,
-    totalWorkHour: 130,
-    hoursPerWeek: 24,
-    completeProject: 3,
-    pendingProject: 2,
-  },
-  {
-    id: 2,
-    imgUrl: "https://i.ibb.co.com/GPrhFkv/2.png",
-    employeeName: "Nikky Qlay",
-    designition: "Senior Designer",
-    todayWorkingHour: 90,
-    ratePerHour: 40,
-    experince: 5,
-    exp_this_platform: 3,
-    totalWorkHour: 150,
-    hoursPerWeek: 24,
-    completeProject: 5,
-    pendingProject: 2,
-  },
-  {
-    id: 3,
-    imgUrl: "https://i.ibb.co.com/xfGjJyz/3.png",
-    employeeName: "William Tennesse",
-    designition: "Senior Designer",
-    todayWorkingHour: 90,
-    ratePerHour: 40,
-    experince: 5,
-    exp_this_platform: 3,
-    totalWorkHour: 150,
-    hoursPerWeek: 24,
-    completeProject: 5,
-    pendingProject: 2,
-  },
-  {
-    id: 4,
-    imgUrl: "https://i.ibb.co.com/nfFG5fL/4.png",
-    employeeName: "Emily Smith",
-    designition: "Creative Director",
-    todayWorkingHour: 90,
-    ratePerHour: 40,
-    experince: 5,
-    exp_this_platform: 3,
-    totalWorkHour: 150,
-    hoursPerWeek: 24,
-    completeProject: 5,
-    pendingProject: 2,
-  },
-  {
-    id: 5,
-    employeeName: "Dan Jhonson",
-    designition: "Graphics Designer",
-    imgUrl: "https://i.ibb.co/YcXc5Cg/1.png",
-    todayWorkingHour: 84,
-    ratePerHour: 42,
-    experince: 5,
-    exp_this_platform: 2,
-    totalWorkHour: 130,
-    hoursPerWeek: 24,
-    completeProject: 3,
-    pendingProject: 2,
-  },
-  {
-    id: 6,
-    imgUrl: "https://i.ibb.co.com/GPrhFkv/2.png",
-    employeeName: "Sarah Davis",
-    designition: "UI/UX Designer",
-    todayWorkingHour: 90,
-    ratePerHour: 40,
-    experince: 5,
-    exp_this_platform: 3,
-    totalWorkHour: 150,
-    hoursPerWeek: 24,
-    completeProject: 5,
-    pendingProject: 2,
-  },
-  {
-    id: 7,
-    imgUrl: "https://i.ibb.co.com/nfFG5fL/4.png",
-    employeeName: "Mike Anders",
-    designition: "Web Designer",
-    todayWorkingHour: 90,
-    ratePerHour: 40,
-    experince: 5,
-    exp_this_platform: 3,
-    totalWorkHour: 150,
-    hoursPerWeek: 24,
-    completeProject: 5,
-    pendingProject: 2,
-  },
-  {
-    id: 8,
-    imgUrl: "https://i.ibb.co/YcXc5Cg/1.png",
-    employeeName: "Jes Williams",
-    designition: "Art Designer",
-    todayWorkingHour: 90,
-    ratePerHour: 40,
-    experince: 5,
-    exp_this_platform: 3,
-    totalWorkHour: 150,
-    hoursPerWeek: 24,
-    completeProject: 5,
-    pendingProject: 2,
-  },
-];
 
 const AllEmployee = () => {
   const theme = useTheme();
+  const [data, setData] = useState([]);
   const [employeeInfo, setEmployeeInfo] = useState([]);
   const [employeeId, setEmployeeId] = useState([]);
+
+  useEffect(() => {
+    axios("/data.json")
+      .then((res) => {
+        setData(res?.data);
+        if (res?.data.length > 0) {
+          setEmployeeId(res.data[2]?.id);
+          setEmployeeInfo(res.data[2]);
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching data:", error);
+      });
+  }, []);
 
   const handleEmployeeData = (info) => {
     setEmployeeId(info?.id);
@@ -200,122 +106,188 @@ const AllEmployee = () => {
               //   sx={{ overflowY: "scroll", height: "calc(100%-72px)" }}
             >
               {data.map((info) => (
-                <Box
-                  className="w-full rounded-[35px] px-[6px] py-[6px] flex items-center justify-between cursor-pointer"
-                  sx={{
-                    bgcolor: "#25293C",
-                  }}
-                  key={info?.id}
-                  onClick={() => handleEmployeeData(info)}
-                >
-                  {/* avatar and invoice details */}
-                  <Box className="flex items-center gap-x-2">
-                    <Avatar
-                      alt="Remy Sharp"
-                      src={info?.imgUrl}
+                <Box key={info?.id} onClick={() => handleEmployeeData(info)}>
+                  {info?.id === employeeId ? (
+                    <Box
+                      className="px-3 py-4 flex justify-between rounded-l-[36px]"
                       sx={{
-                        width: 50,
-                        height: 50,
+                        bgcolor: theme.palette.background.cardBg,
+                        position: "relative",
+                        "&::before": {
+                          content: '"eat burger"',
+                          position: "absolute",
+                          top: 0,
+                          left: 0,
+                          width: "100%",
+                          height: "100%",
+                          backgroundColor: "rgba(0, 0, 0, 0.1)",
+                          // other styles for ::before
+                        },
+                        "&::after": {
+                          content: '"After Text"', // Example with text
+                          position: "absolute",
+                          bottom: 0,
+                          right: 0,
+                          color: "red",
+                        
+                          // other styles for ::after
+                        },
                       }}
-                    />
-                    {/* Employee name and designition */}
-                    <Box>
-                      <Typography
-                        sx={{
-                          fontWeight: "600",
-                          fontSize: { xs: "14px", md: "16px" },
-                          color: theme.palette.primary.semiWhite,
-                        }}
+                    >
+                      <IconButton
+                        size="large"
+                        sx={{ bgcolor: theme.palette.primary.main }}
                       >
-                        {info?.employeeName}{" "}
-                        {/* Display dynamic employee name */}
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontSize: "13px",
-                          color: theme.palette.text.white,
-                        }}
+                        <KeyboardArrowLeftIcon />
+                      </IconButton>
+                      <IconButton
+                        size="large"
+                        sx={{ bgcolor: theme.palette.primary.main }}
                       >
-                        {info?.designition}
-                      </Typography>
+                        <NotificationsIcon />
+                      </IconButton>
+                      <IconButton
+                        size="large"
+                        sx={{ bgcolor: theme.palette.primary.main }}
+                      >
+                        <EditCalendarIcon />
+                      </IconButton>
+                      <IconButton
+                        size="large"
+                        sx={{ bgcolor: theme.palette.primary.main }}
+                      >
+                        <SearchIcon />
+                      </IconButton>
+                      <IconButton
+                        size="large"
+                        sx={{ bgcolor: theme.palette.primary.main }}
+                      >
+                        <FilterAltIcon />
+                      </IconButton>
+                      <IconButton
+                        size="large"
+                        sx={{ bgcolor: theme.palette.primary.main }}
+                      >
+                        <SouthEastIcon />
+                      </IconButton>
                     </Box>
-                  </Box>
+                  ) : (
+                    <Box
+                      className="w-full rounded-[35px] px-[6px] py-[6px] flex items-center justify-between cursor-pointer"
+                      sx={{
+                        bgcolor: "#25293C",
+                      }}
+                    >
+                      {/* avatar and invoice details */}
+                      <Box className="flex items-center gap-x-2">
+                        <Avatar
+                          alt="Remy Sharp"
+                          src={info?.imgUrl}
+                          sx={{
+                            width: 50,
+                            height: 50,
+                          }}
+                        />
+                        {/* Employee name and designition */}
+                        <Box>
+                          <Typography
+                            sx={{
+                              fontWeight: "600",
+                              fontSize: { xs: "14px", md: "16px" },
+                              color: theme.palette.primary.semiWhite,
+                            }}
+                          >
+                            {info?.employeeName}{" "}
+                            {/* Display dynamic employee name */}
+                          </Typography>
+                          <Typography
+                            sx={{
+                              fontSize: "13px",
+                              color: theme.palette.text.white,
+                            }}
+                          >
+                            {info?.designition}
+                          </Typography>
+                        </Box>
+                      </Box>
 
-                  {/* dot section */}
-                  <Box
-                    className="py-1 px-2 flex gap-x-2"
-                    //   sx={{
-                    //     background: `repeating-linear-gradient(-55deg, #373737, #373737 7px, #4f4d4d 7px, #4f4d4d 9px)`,
-                    //     border: `1px solid ${theme.palette.primary.semiWhite}`,
-                    //     borderRadius: "20px",
-                    //   }}
-                  >
-                    <Box className="grid grid-cols-1 text-center">
-                      <Typography>1</Typography>
+                      {/* dot section */}
                       <Box
-                        className="w-6 h-6 rounded-full flex justify-center items-center "
-                        sx={{
-                          border: "3px solid",
-                          borderColor: theme.palette.primary.cardBg2,
-                        }}
+                        className="py-1 px-2 flex gap-x-2"
+                        //   sx={{
+                        //     background: `repeating-linear-gradient(-55deg, #373737, #373737 7px, #4f4d4d 7px, #4f4d4d 9px)`,
+                        //     border: `1px solid ${theme.palette.primary.semiWhite}`,
+                        //     borderRadius: "20px",
+                        //   }}
                       >
-                        <Box
-                          className="w-2 h-2 rounded-full"
-                          sx={{ bgcolor: "#4CAF50" }}
-                        ></Box>
+                        <Box className="grid grid-cols-1 text-center">
+                          <Typography>1</Typography>
+                          <Box
+                            className="w-6 h-6 rounded-full flex justify-center items-center "
+                            sx={{
+                              border: "3px solid",
+                              borderColor: theme.palette.primary.cardBg2,
+                            }}
+                          >
+                            <Box
+                              className="w-2 h-2 rounded-full"
+                              sx={{ bgcolor: "#4CAF50" }}
+                            ></Box>
+                          </Box>
+                        </Box>
+                        <Box className="grid grid-cols-1 text-center">
+                          <Typography>2</Typography>
+                          <Box
+                            className="w-6 h-6 rounded-full flex justify-center items-center "
+                            sx={{
+                              border: "3px solid",
+                              borderColor: theme.palette.primary.cardBg2,
+                            }}
+                          >
+                            <Box
+                              className="w-2 h-2 rounded-full"
+                              sx={{ bgcolor: "#2196F3" }}
+                            ></Box>
+                          </Box>
+                        </Box>
+                        <Box className="grid grid-cols-1 text-center">
+                          <Typography>3</Typography>
+                          <Box
+                            className="w-6 h-6 rounded-full flex justify-center items-center "
+                            sx={{
+                              border: "3px solid",
+                              borderColor: theme.palette.primary.cardBg2,
+                            }}
+                          >
+                            <Box
+                              className="w-2 h-2 rounded-full"
+                              sx={{ bgcolor: "#2196F3" }}
+                            ></Box>
+                          </Box>
+                        </Box>
+                        <Box className="grid grid-cols-1 text-center">
+                          <Typography>4</Typography>
+                          <Box
+                            className="w-6 h-6 rounded-full flex justify-center items-center "
+                            sx={{
+                              border: "3px solid",
+                              borderColor: theme.palette.primary.cardBg2,
+                            }}
+                          >
+                            <Box
+                              className="w-2 h-2 rounded-full"
+                              sx={{ bgcolor: "#2196F3" }}
+                            ></Box>
+                          </Box>
+                        </Box>
                       </Box>
-                    </Box>
-                    <Box className="grid grid-cols-1 text-center">
-                      <Typography>2</Typography>
-                      <Box
-                        className="w-6 h-6 rounded-full flex justify-center items-center "
-                        sx={{
-                          border: "3px solid",
-                          borderColor: theme.palette.primary.cardBg2,
-                        }}
-                      >
-                        <Box
-                          className="w-2 h-2 rounded-full"
-                          sx={{ bgcolor: "#2196F3" }}
-                        ></Box>
-                      </Box>
-                    </Box>
-                    <Box className="grid grid-cols-1 text-center">
-                      <Typography>3</Typography>
-                      <Box
-                        className="w-6 h-6 rounded-full flex justify-center items-center "
-                        sx={{
-                          border: "3px solid",
-                          borderColor: theme.palette.primary.cardBg2,
-                        }}
-                      >
-                        <Box
-                          className="w-2 h-2 rounded-full"
-                          sx={{ bgcolor: "#2196F3" }}
-                        ></Box>
-                      </Box>
-                    </Box>
-                    <Box className="grid grid-cols-1 text-center">
-                      <Typography>4</Typography>
-                      <Box
-                        className="w-6 h-6 rounded-full flex justify-center items-center "
-                        sx={{
-                          border: "3px solid",
-                          borderColor: theme.palette.primary.cardBg2,
-                        }}
-                      >
-                        <Box
-                          className="w-2 h-2 rounded-full"
-                          sx={{ bgcolor: "#2196F3" }}
-                        ></Box>
-                      </Box>
-                    </Box>
-                  </Box>
 
-                  {/* donut */}
-                  <Box className="flex justify-end items-center pl-2">
-                    <DonutChartWithIcon></DonutChartWithIcon>
-                  </Box>
+                      {/* donut */}
+                      <Box className="flex justify-end items-center pl-2">
+                        <DonutChartWithIcon></DonutChartWithIcon>
+                      </Box>
+                    </Box>
+                  )}
                 </Box>
               ))}
             </Box>
@@ -334,8 +306,9 @@ const AllEmployee = () => {
           <Box
             className="px-4 py-4"
             sx={{
-              bgcolor: theme.palette.background.main,
+              bgcolor: theme.palette.background.cardBg,
               borderRadius: "32px",
+              height: "100vh",
             }}
           >
             <EmployeeDetailsCard
